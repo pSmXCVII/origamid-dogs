@@ -35,7 +35,7 @@ const FeedPhotos = ({ page, user, setModalPhoto, setInfinite }) => {
       })}
     </ul>
   )
-  else return null;
+  else return <div><p>Não há nada por aqui. Poste alguma</p></div>;
 }
 
 export default FeedPhotos

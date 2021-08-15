@@ -7,6 +7,7 @@ import useFetch from '../../Hooks/useFetch';
 import { PHOTO_POST } from '../../api';
 import Error from '../Helpers/Error';
 import { useNavigate } from 'react-router';
+import Head from '../Helpers/Head';
 
 const UserPhotoPost = () => {
   const nome = useForm();
@@ -17,7 +18,7 @@ const UserPhotoPost = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if(data) navigate('/conta');
+    if(data) navigate('/');
   }, [ data, navigate ])
 
   function handlePhotoPost(e) {
@@ -34,15 +35,22 @@ const UserPhotoPost = () => {
   }
 
   function handleImgChange({ target }) {
-    setImg({
-      preview: URL.createObjectURL(target.files[0]),
-      raw: target.files[0],
-
-    })
+    if(target.files[0]){
+      setImg({
+        preview: URL.createObjectURL(target.files[0]),
+        raw: target.files[0],
+      })
+    } else {
+      setImg({
+        preview: null,
+        raw: null,
+      })
+    }
   }
 
   return (
     <section className={`${styles.photoPost} animeLeft`}>
+      <Head title="Enviar foto" description="Página de envio de fotos" />
       <form onSubmit={handlePhotoPost}>
         <Input
           label="Nome"
